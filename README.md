@@ -17,6 +17,10 @@ MAPS is primarily developed in the Unity engine. Unity provides many [beginner f
 ### General Engineering
 This section includes tools developed for general simulation practice, such as saving data at regular intervals. While Unity is used in engineering fields, it is still a fairly new platform in this respect and so doesn’t provide the same scientific output capabilities as other platforms, such as MatLab.
 
+- [Waypoint Following](https://github.com/CASCADE-MAPS/MAPS/tree/main/Waypoint%20Following)
+
+- [Data Acquisition](https://github.com/CASCADE-MAPS/MAPS/tree/main/Data%20Acquisition)
+
 ### Drone Simulation
 This section includes tools which have been used in various drone simulation applications. This ranges from basic waypoint following controllers and the tools to create a set of waypoints, to finite state machines for autonomous decision making in drones.
 
