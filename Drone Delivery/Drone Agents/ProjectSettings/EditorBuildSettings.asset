@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Library AR.unity
+    guid: b46de31626c69a440a9a57661927949f
+  - enabled: 0
+    path: Assets/Scenes/Bridge AR.unity
+    guid: 2843064ed5753d94e91bcf52038e38c4
+  - enabled: 0
+    path: Assets/Scenes/Arndale AR.unity
+    guid: a9e10754fa643d740901f9c9545fd97f
+  - enabled: 1
+    path: Assets/Scenes/Pizza AR.unity
+    guid: 1381784a10bc8c04e9e2843d0122ec35
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 1d4334433f2e6364c9d760e543de9f0d, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b43c3f8921402ea44a8433853928de1c, type: 2}
