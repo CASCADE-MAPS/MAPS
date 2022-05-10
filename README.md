@@ -22,7 +22,7 @@ This section includes tools developed for general simulation practice, such as s
 - [Data Acquisition](https://github.com/CASCADE-MAPS/MAPS/tree/main/Data%20Acquisition)
 
 ## Drone Simulation
-This section includes tools which have been used in various drone simulation applications. This ranges from basic waypoint following controllers and the tools to create a set of waypoints, to finite state machines for autonomous decision making in drones.
+This section includes tools which have been used in various drone simulation applications. This ranges from basic waypoint following controllers and the tools to create a set of waypoints, to finite state machines for autonomous decision making in drones. An [drone delivery simulation Unity Project](https://github.com/CASCADE-MAPS/MAPS/tree/main/Drone%20Delivery/Drone%20Agents) is included in this repository. The project uses assets which are larger than 100 mb in size and so cannot be included in this repository. The assets are available on request if they are required to use the project.
 
 ## Web Deployment of Simulations
 Unity simulations may be built for WebGL applications and then hosted using GitHub Pages. This workflow allows for simulations to be easily shared across platforms without the need to install additional software. For an example of this application, see the [multi-user drone inspection simulation](https://conorzam.github.io/MultiDrone/) developed in MAPS.
