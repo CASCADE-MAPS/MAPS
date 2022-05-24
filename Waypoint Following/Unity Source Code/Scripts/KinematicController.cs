@@ -1,13 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Auto adds the waypoint follower script - we'll need it so might as well enforce it
-[RequireComponent(typeof(WayPointTracker))]
+[RequireComponent(typeof(WaypointTracker))]
 public class KinematicController : MonoBehaviour
 {
     [Header("Moves the GameObject towards the next waypoint at maximum speed")]
-    WayPointTracker wayPointTracker;
+    WaypointTracker waypointTracker;
     [Tooltip("Movement speed (m/s)")]
     public float speed;
     [Tooltip("Sets orientation speed (degrees/s), does not affect movement")]
@@ -25,15 +25,15 @@ public class KinematicController : MonoBehaviour
     void Start()
     {
         // Get the waypoint tracker which keeps track of our current target waypoint
-        wayPointTracker = GetComponent<WayPointTracker>();
-        // No need to check for a null because RequireComponent ensures we always have a WayPointTracker
+        waypointTracker = GetComponent<WaypointTracker>();
+        // No need to check for a null because RequireComponent ensures we always have a WaypointTracker
     }
 
     // We could have this in Update or FixedUpdate, doesn't really matter
     void Update()
     {
         // Get target position from waypoint tracker
-        targetPosition = wayPointTracker.GetCurrentWayPoint();
+        targetPosition = waypointTracker.GetCurrentWaypoint();
         
 
         // Move towards target waypoint with velocity that has a magnitude of 'speed'
@@ -43,7 +43,7 @@ public class KinematicController : MonoBehaviour
         if (useLookPoints)
         {
             // Get the look point from the tracker
-            targetLookPoint = wayPointTracker.GetCurrentLookPoint();
+            targetLookPoint = waypointTracker.GetCurrentLookPoint();
             // Look orientation
             Quaternion targetRotation = Quaternion.LookRotation(targetLookPoint - transform.position);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);

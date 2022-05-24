@@ -1,10 +1,10 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(WayPointManager))]
-public class WayPointEditor : Editor
+[CustomEditor(typeof(WaypointManager))]
+public class WaypointEditor : Editor
 {
     Tool lastTool = Tool.None;
     void OnEnable()
@@ -20,15 +20,15 @@ public class WayPointEditor : Editor
 
     void DrawCustomInspector()
     {
-        WayPointManager wpManager = (WayPointManager)target;
+        WaypointManager wpManager = (WaypointManager)target;
 
-        wpManager.newWayPointOffset = EditorGUILayout.Vector3Field("New WayPoint Offset", wpManager.newWayPointOffset);
+        wpManager.newWaypointOffset = EditorGUILayout.Vector3Field("New Waypoint Offset", wpManager.newWaypointOffset);
         wpManager.newLookPointOffset = EditorGUILayout.Vector3Field("New LookPoint Offset", wpManager.newLookPointOffset);
 
-        // WayPoint gizmos
+        // Waypoint gizmos
         wpManager.debugRadius = EditorGUILayout.FloatField("Gizmo Size", wpManager.debugRadius);
-        wpManager.pointColor = EditorGUILayout.ColorField("WayPoint Colour", wpManager.pointColor);
-        wpManager.lineColor = EditorGUILayout.ColorField("WayPoint Line Colour", wpManager.lineColor);
+        wpManager.pointColor = EditorGUILayout.ColorField("Waypoint Colour", wpManager.pointColor);
+        wpManager.lineColor = EditorGUILayout.ColorField("Waypoint Line Colour", wpManager.lineColor);
 
         // LookPoint gizmos
         wpManager.useLookPoints = GUILayout.Toggle(wpManager.useLookPoints, "Show LookPoints");
@@ -40,17 +40,17 @@ public class WayPointEditor : Editor
 
         wpManager.persistentGizmos = GUILayout.Toggle(wpManager.persistentGizmos, "Persistent Gizmos");
 
-        wpManager.showWayPointList = GUILayout.Toggle(wpManager.showWayPointList, "Show WayPoint List");
+        wpManager.showWaypointList = GUILayout.Toggle(wpManager.showWaypointList, "Show Waypoint List");
         // Only draw the list if it's checked
-        if (wpManager.showWayPointList)
+        if (wpManager.showWaypointList)
         {
-            int wpCount = wpManager.WayPoints.Count;
+            int wpCount = wpManager.Waypoints.Count;
             for (int i = 0; i < wpCount; i++)
             {
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("WP " + (i+1).ToString());
-                wpManager.WayPoints[i].position = EditorGUILayout.Vector3Field("Position", wpManager.WayPoints[i].position);
-                wpManager.WayPoints[i].lookPoint = EditorGUILayout.Vector3Field("Look Point", wpManager.WayPoints[i].lookPoint);
+                wpManager.Waypoints[i].position = EditorGUILayout.Vector3Field("Position", wpManager.Waypoints[i].position);
+                wpManager.Waypoints[i].lookPoint = EditorGUILayout.Vector3Field("Look Point", wpManager.Waypoints[i].lookPoint);
             }
 
         }
@@ -59,35 +59,35 @@ public class WayPointEditor : Editor
     protected virtual void OnSceneGUI()
     {
         Tools.current = Tool.None;
-        WayPointManager wpManager = (WayPointManager)target;
+        WaypointManager wpManager = (WaypointManager)target;
 
-        int count = wpManager.WayPoints.Count;
+        int count = wpManager.Waypoints.Count;
         for (int i = 0; i < count - 1; i++)
         {
             if (!wpManager.persistentGizmos)
             {
                 // Draw handles for waypoint positions
                 Handles.color = wpManager.pointColor;
-                Handles.CubeHandleCap(0, wpManager.WayPoints[i].position, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
+                Handles.CubeHandleCap(0, wpManager.Waypoints[i].position, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
                 Handles.color = wpManager.lineColor;
-                Handles.DrawLine(wpManager.WayPoints[i].position, wpManager.WayPoints[i + 1].position);
+                Handles.DrawLine(wpManager.Waypoints[i].position, wpManager.Waypoints[i + 1].position);
 
                 if (wpManager.useLookPoints)
                 {
                     // Draw handles for waypoint look positions
                     Handles.color = wpManager.lookPointColor;
-                    Handles.SphereHandleCap(0, wpManager.WayPoints[i].lookPoint, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
+                    Handles.SphereHandleCap(0, wpManager.Waypoints[i].lookPoint, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
                     Handles.color = wpManager.lineOfSightColor;
-                    Handles.DrawLine(wpManager.WayPoints[i].position, wpManager.WayPoints[i].lookPoint);
+                    Handles.DrawLine(wpManager.Waypoints[i].position, wpManager.Waypoints[i].lookPoint);
                 }
             }
             // Update positions using standard xyz position handles
-            wpManager.WayPoints[i].position = Handles.PositionHandle(wpManager.WayPoints[i].position, Quaternion.identity);
+            wpManager.Waypoints[i].position = Handles.PositionHandle(wpManager.Waypoints[i].position, Quaternion.identity);
 
             if (wpManager.useLookPoints)
             {
                 // Update lookpoint positions using xyz handles
-                wpManager.WayPoints[i].lookPoint = Handles.PositionHandle(wpManager.WayPoints[i].lookPoint, Quaternion.identity);
+                wpManager.Waypoints[i].lookPoint = Handles.PositionHandle(wpManager.Waypoints[i].lookPoint, Quaternion.identity);
             }
         }
         if (count >= 1)
@@ -96,20 +96,20 @@ public class WayPointEditor : Editor
             {
                 // Draw waypoint positions
                 Handles.color = wpManager.pointColor;
-                Handles.CubeHandleCap(0, wpManager.WayPoints[count - 1].position, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
+                Handles.CubeHandleCap(0, wpManager.Waypoints[count - 1].position, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
 
                 if (wpManager.useLookPoints)
                 {
                     // Draw lookpoints
                     Handles.color = wpManager.lookPointColor;
-                    Handles.SphereHandleCap(0, wpManager.WayPoints[count - 1].lookPoint, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
-                    Handles.DrawLine(wpManager.WayPoints[count-1].position, wpManager.WayPoints[count-1].lookPoint);
+                    Handles.SphereHandleCap(0, wpManager.Waypoints[count - 1].lookPoint, Quaternion.identity, wpManager.debugRadius, EventType.Repaint);
+                    Handles.DrawLine(wpManager.Waypoints[count-1].position, wpManager.Waypoints[count-1].lookPoint);
                 }
             }
-            wpManager.WayPoints[count - 1].position = Handles.PositionHandle(wpManager.WayPoints[count - 1].position, Quaternion.identity);
+            wpManager.Waypoints[count - 1].position = Handles.PositionHandle(wpManager.Waypoints[count - 1].position, Quaternion.identity);
             if (wpManager.useLookPoints)
             {
-                wpManager.WayPoints[count-1].lookPoint = Handles.PositionHandle(wpManager.WayPoints[count-1].lookPoint, Quaternion.identity);
+                wpManager.Waypoints[count-1].lookPoint = Handles.PositionHandle(wpManager.Waypoints[count-1].lookPoint, Quaternion.identity);
             }
         }
 
@@ -121,18 +121,18 @@ public class WayPointEditor : Editor
 
         DrawCustomInspector();
 
-        WayPointManager wpManager = (WayPointManager)target;
-        if (GUILayout.Button("Add WayPoint"))
+        WaypointManager wpManager = (WaypointManager)target;
+        if (GUILayout.Button("Add Waypoint"))
         {
-            wpManager.AddWayPoint();
+            wpManager.AddWaypoint();
             HandleUtility.Repaint();
             SceneView.RepaintAll();
             Repaint();
         }
         GUILayout.Space(10);
-        if (GUILayout.Button("Remove Last WayPoint"))
+        if (GUILayout.Button("Remove Last Waypoint"))
         {
-            wpManager.RemoveLastWayPoint();
+            wpManager.RemoveLastWaypoint();
             Repaint();
             HandleUtility.Repaint();
             SceneView.RepaintAll();

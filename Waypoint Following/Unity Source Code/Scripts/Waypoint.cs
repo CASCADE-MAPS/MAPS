@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ using UnityEngine;
 // Because we now have more than 1 piece of data, it makes sense to wrap the data
 // inside a class for easier management in lists etc
 [System.Serializable]
-public class WayPoint
+public class Waypoint
 {
     // Where to be
     public Vector3 position;
@@ -15,7 +15,7 @@ public class WayPoint
 
 
     // Class constructor
-    public WayPoint(Vector3 _position, Vector3 _lookPoint)
+    public Waypoint(Vector3 _position, Vector3 _lookPoint)
     {
         position = _position;
         lookPoint = _lookPoint;
